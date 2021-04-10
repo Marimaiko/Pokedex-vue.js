@@ -69,7 +69,6 @@ export default {
     },
     closeCard: function() {
       this.showCard = !this.showCard;
-      console.log("ta funcionando bb?")
     }
   },
 };

@@ -88,7 +88,6 @@ export default {
   },
   methods: {
     close: function () {
-        console.log('Checando...')
         this.$emit("closeDetail");
     },
   },
