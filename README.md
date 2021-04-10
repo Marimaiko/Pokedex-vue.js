@@ -1,9 +1,9 @@
 # vue-Pokedex
 
 ## Tecnologias utilizadas:
-Vue.js
-BootstrapVue
-Axios
+Vue.js,
+BootstrapVue,
+Axios,
 PokeAPI
 
 ## Project setup
