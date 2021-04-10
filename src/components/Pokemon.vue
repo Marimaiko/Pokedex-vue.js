@@ -42,7 +42,6 @@ export default {
             img:'',
             type:'',
             type1:'',
-            selectedPokemon: ''
         }
       } 
     },
@@ -60,11 +59,7 @@ export default {
   },
   methods: {
       show: function(){
-        console.log('Filho clicavel')
         this.$emit('show-DetailsCard', this.pokeNumber)
-        console.log(this.pokeNumber)
-        // this.$emit(this.url)
-        // this.$$emit('selectedPokemon', url)
       }
   }
 };
@@ -74,17 +69,18 @@ export default {
 #poke-card{
     margin-bottom: 25px;
     width: 250px;
-    /* min-height: fit-content; */
+    box-shadow: 0 10px 20px 0 rgba(5, 5, 5, 0.863), 0 10px 10px 0 rgba(125, 128, 127, 0.897);
 }
 .card-btn{
-    background-color: darkgray ;
+    background-color: #f9f6d8;
     height: 170px;
 }
 .title{
     width: fit-content
 }
 p{
-    background-color:rgba(0, 0, 0, 0.07);
+    background-color:#454544;
+    color: #f5e201;
     border-radius: 10px;
     text-align: center;
 }
@@ -96,5 +92,4 @@ p{
     min-width: 150px;
     transform:translateX(-30px);
 }
-
 </style>

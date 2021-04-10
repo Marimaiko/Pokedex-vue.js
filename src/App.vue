@@ -4,26 +4,26 @@
       <b-row>
         <b-col>
           <b-card-group deck>
-            <h2 id="main-title">Pega os Pokemon</h2>
+            <h2 id="main-title">Vue Pokedex.js - Mariana Maiko</h2>
             <div v-for="(pokemon, index) in pokemonList" :key="index">
               <Pokemon
                 :pokeNumber="index + 1"
                 :name="pokemon.name"
                 :url="pokemon.url"
-                v-on:show-DetailsCard="showDetailsCard"
                 :pokeColor='pokeColor'
+                v-on:show-DetailsCard="showDetailsCard"
               />
             </div>
           </b-card-group>
         </b-col>
-
         <b-col no-body class="rounded-0">
           <PokeBigCard v-if="showCard" />
           <PokeDetails
               v-if="!showCard"
+              v-on:closeDetail="closeCard"
               :url="pokeLink"
-              :pokeNumber="pokemonNumber"/>
-              
+              :pokeNumber="pokemonNumber"
+              />
         </b-col>
       </b-row>
     </b-container>
@@ -50,9 +50,8 @@ export default {
   },
   created: function () {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
+      .get("https://pokeapi.co/api/v2/pokemon?limit=898&offset=0")
       .then((res) => {
-        console.log(res.data.results);
         this.pokemonList = res.data.results;
       })
       .catch((err) => console.log(err));
@@ -68,6 +67,10 @@ export default {
       this.pokemonNumber = pokeNumber;
       this.pokeLink = this.pokemonUrl + this.pokemonNumber;
     },
+    closeCard: function() {
+      this.showCard = !this.showCard;
+      console.log("ta funcionando bb?")
+    }
   },
 };
 </script>

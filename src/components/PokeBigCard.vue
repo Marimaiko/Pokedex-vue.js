@@ -17,9 +17,6 @@ export default {
       image: image,
     };
   },
-  props:{
-    //   showCard:Boolean
-  }
 
 };
 </script>
@@ -27,7 +24,7 @@ export default {
 <style scoped>
 .big-card{
   width: auto;
-  box-shadow: 0 10px 20px 0 rgba(206, 4, 4, 0.863), 0 10px 30px 0 rgba(18, 201, 131, 0.897);
+  box-shadow: 0 10px 20px 0 rgba(5, 5, 5, 0.863), 0 10px 30px 0 rgba(125, 128, 127, 0.897);
   border-radius: 35px;
   position: fixed;
 }
