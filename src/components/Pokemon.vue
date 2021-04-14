@@ -1,7 +1,7 @@
 <template>
   <div class="cards">
       <b-card no-body class="overflow-hidden" id="poke-card">
-        <button class="card-btn" v-on:click="show">
+        <button class="card-btn" v-on:click="show" v-bind:style="{backgroundColor:pokemon.color}">
             <b-row no-gutters>
                 <b-col md="7">
                     <b-card-body class="title">
@@ -28,20 +28,28 @@ import axios from "axios";
 
 export default {
   created: function () {
-    axios.get(this.url).then((res) => {
-        this.pokemon.img = res.data.sprites.front_default;
-        this.pokemon.type = res.data.types[0].type.name;
-        this.pokemon.type1 = res.data.types[1].type.name;
-        console.log(res.data);
-    })
+    axios.all([
+      axios.get(this.url),
+      axios.get('https://pokeapi.co/api/v2/pokemon-species/'+this.pokeNumber)
+    ]).then(axios.spread((pokemonRes, pokemonColorRes)=>{
+      this.pokemon.img = pokemonRes.data.sprites.front_default;
+      this.pokemon.type = pokemonRes.data.types[0].type.name;
+      if (pokemonRes.data.types.length > 1) {
+        this.pokemon.type1 = pokemonRes.data.types[1].type.name;
+      }
+      this.pokemon.color = pokemonColorRes.data.color.name;
+      console.log(this.pokemon.color.backgroundColor)
+    }))
     .catch(err => console.log(err));
-  },  
+   },
+
   data(){
     return{
         pokemon:{
-            img:'',
-            type:'',
-            type1:'',
+          img:'',
+          type:'',
+          type1:'',
+          color:''
         }
       } 
     },
@@ -49,6 +57,7 @@ export default {
     name: String,
     url: String,
     pokeNumber: Number,
+    pokeColor:String
   },
  
   filters: {
@@ -72,7 +81,6 @@ export default {
     box-shadow: 0 10px 20px 0 rgba(5, 5, 5, 0.863), 0 10px 10px 0 rgba(125, 128, 127, 0.897);
 }
 .card-btn{
-    background-color: #f9f6d8;
     height: 170px;
 }
 .title{
@@ -92,4 +100,5 @@ p{
     min-width: 150px;
     transform:translateX(-30px);
 }
+
 </style>

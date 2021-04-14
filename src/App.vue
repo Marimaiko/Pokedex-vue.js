@@ -10,7 +10,6 @@
                 :pokeNumber="index + 1"
                 :name="pokemon.name"
                 :url="pokemon.url"
-                :pokeColor='pokeColor'
                 v-on:show-DetailsCard="showDetailsCard"
               />
             </div>
@@ -42,15 +41,14 @@ export default {
     return {
       pokemonList: [],
       showCard: true,
-      pokemonUrl: "https://pokeapi.co/api/v2/pokemon/",
-      pokeColor:'black',
-      pokemonNumber: 0,
+      pokemonUrl: "https://pokeapi.co/api/v2/pokemon",
+      pokeColor:'',
       pokeLink: "",
     };
   },
   created: function () {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=898&offset=0")
+      .get("https://pokeapi.co/api/v2/pokemon?limit=100&offset=0")
       .then((res) => {
         this.pokemonList = res.data.results;
       })
@@ -65,7 +63,7 @@ export default {
     showDetailsCard: function (pokeNumber) {
       this.showCard = !this.showCard;
       this.pokemonNumber = pokeNumber;
-      this.pokeLink = this.pokemonUrl + this.pokemonNumber;
+      this.pokeLink = this.pokemonUrl + '/' + this.pokemonNumber;
     },
     closeCard: function() {
       this.showCard = !this.showCard;
